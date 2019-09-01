@@ -1,0 +1,13 @@
+[workspace]
+
+members = [
+  "cli",
+  "mysql-proxy",
+  "mysql-utils",
+  "proxy",
+  "xdebug-proxy",
+  "ser_utils",
+  "scratchpad",
+  "frontend",
+  "rusc"
+]

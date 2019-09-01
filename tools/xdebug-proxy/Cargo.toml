@@ -1,0 +1,10 @@
+[package]
+name = "xdebug-proxy"
+version = "0.1.0"
+authors = ["Goodcode <15660898+goodcodedev@users.noreply.github.com>"]
+edition = "2018"
+workspace = ".."
+
+[dependencies]
+tokio = "0.1.22"
+tokio-tcp = "0.1.3"

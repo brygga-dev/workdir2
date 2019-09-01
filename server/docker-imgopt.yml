@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  imagemagick-server:
+    build: imagemagick-server
+    volumes:
+      - "wp-uploads:/imgs"
+  image-optim-server:
+    build: image-optim-server
+    volumes:
+      - "wp-uploads:/images"

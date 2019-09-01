@@ -1,0 +1,54 @@
+version: '3.3'
+# gudmund:TezSetGl@hiQB^2!*Y
+services:
+  db:
+    build: mysql-custom
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: h6sgBSQ?X6e
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+
+  wordpress-container:
+    depends_on:
+      - db
+    # Will be overridden in both dev and prod
+    image: wordpress:5
+    restart: always
+    volumes:
+      - "wp-uploads:/var/www/html/wp-content/uploads/"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      IS_DOCKER: 1
+  proxy:
+    build: proxy-dev
+    # Mabye user 33
+    environment:
+      RUST_BACKTRACE: 1
+      RUST_LOG: actix_web=debug
+      BIND: "http://0.0.0.0:80"
+      EXTERNAL: "http://192.168.33.10:8080"
+      WORDPRESS: "http://wordpress-container"
+      #WORDPRESS: "http://192.168.33.10"
+      CACHE_DIR: "/var/lib/proxy"
+      UPLOADS_PATH: "/wp-uploads"
+    volumes:
+      - "wp-uploads:/wp-uploads"
+  wp-cli:
+    depends_on:
+      - db
+      - wordpress-container
+    build: wp-cli
+    environment:
+      WAIT_FOR: "db:3306"
+    ports:
+      - "2345:22"
+volumes:
+  db_data: {}
+  wp-uploads: {}

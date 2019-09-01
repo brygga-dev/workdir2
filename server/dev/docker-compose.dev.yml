@@ -1,0 +1,30 @@
+version: '3.3'
+services:
+  db:
+    ports:
+      - "3307:3306"
+  db-proxy:
+    build: db-proxy
+    ports:
+      - "3308:3308"
+  wordpress-container:
+    build: ../dev/wp-dev
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DEBUG: 1
+      IS_DOCKER_DEV: 1
+      #WORDPRESS_DB_HOST: db-proxy:3308
+      WORDPRESS_DB_HOST: db:3306
+  proxy:
+    build: ../dev/proxy-dev
+    ports:
+      - "80:80"
+    # Mabye user 33
+    environment:
+      IS_DOCKER_DEV: 1
+      DEV_MODE: 1
+      RUST_BACKTRACE: 1
+      EXTERNAL: "http://192.168.33.12"
+volumes:
+  backup: {}

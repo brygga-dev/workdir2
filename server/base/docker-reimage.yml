@@ -1,0 +1,8 @@
+version: '3.3'
+services:
+  wordpress-container:
+    environment:
+      REIMAGE_URL: "http://reimage:7075"
+  reimage:
+    image: larrabee/reimage
+    restart: always

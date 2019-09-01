@@ -1,0 +1,12 @@
+[package]
+name = "rusc"
+version = "0.1.0"
+authors = ["brygga-dev <52463886+brygga-dev@users.noreply.github.com>"]
+edition = "2018"
+features = ["proc_macro_lib"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+syn = {version = "1.0.5", features = ["extra-traits", "full"]}
+proc-macro2 = {version = "1.0", features = ["span-locations"]}

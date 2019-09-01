@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  wordpress-container:
+    build: ../prod/wp-prod
+    volumes:
+      - "wp-root:/var/www/html"
+  proxy:
+    build: ../prod/proxy-prod
+    ports:
+      - "80:80"
+    environment:
+      RUST_BACKTRACE: 1
+      EXTERNAL: "http://13.48.23.151"
+  wp-cli:
+    volumes:
+      - "wp-root:/var/www/html"
+volumes:
+  wp-root: {}

@@ -1,0 +1,2 @@
+#minute hour    day     month   week  command
+*/10       *       *       *       *     /cron-job.sh

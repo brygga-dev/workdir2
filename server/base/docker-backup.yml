@@ -1,0 +1,15 @@
+# Real prod
+# this will run periodic backups,
+# so it is important not to run it with incorrect data
+version: '3.3'
+services:
+  backup:
+    build: backup
+    depends_on:
+      - db
+      - wordpress-container
+    volumes:
+      - /var/lib/docker-backup/
+      - wp-uploads:/var/lib/docker-backup/repo/uploads
+volumes:
+  backup: {}

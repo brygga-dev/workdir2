@@ -1,0 +1,17 @@
+[package]
+name = "wp-cli-server"
+version = "0.1.0"
+authors = ["brygga-dev <52463886+brygga-dev@users.noreply.github.com>"]
+edition = "2018"
+workspace = ".."
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-rt = "0.2.4"
+actix = "0.8.3"
+actix-web = "1.0.5"
+actix-web-actors = "1.0.2"
+env_logger = "0.6"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0.40"
